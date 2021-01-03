@@ -3,7 +3,7 @@ import pygame
 size = width, height = 800, 400
 screen = pygame.display.set_mode(size)
 pygame.init()
-pygame.display.set_caption('Жёлтый круг')
+pygame.display.set_caption('Tetris')
 running = True
 
 while running:
