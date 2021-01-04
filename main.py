@@ -6,6 +6,7 @@ pygame.init()
 pygame.display.set_caption('Tetris')
 running = True
 position = [[0] * 8] * 10
+k = 10
 
 
 class Board:
