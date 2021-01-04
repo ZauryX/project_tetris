@@ -5,6 +5,7 @@ screen = pygame.display.set_mode(size)
 pygame.init()
 pygame.display.set_caption('Tetris')
 running = True
+qwerty = 10
 
 while running:
     for event in pygame.event.get():
