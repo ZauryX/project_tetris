@@ -78,37 +78,6 @@ for i in coords:
         list12.append(i)
 
 COORDS = [list1, list2, list3, list4, list5, list6, list7, list8, list9, list10, list11, list12]
-print(COORDS)
-position = [[0] * 8] * 10
-
-
-class Board:
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
-        self.left = 25
-        self.top = 10
-        self.cell_size = 50
-
-    def set_view(self, left, top, cell_size):
-        self.left = left
-        self.top = top
-        self.cell_size = cell_size
-
-    def render(self):
-        for i in range(self.width):
-            for j in range(self.height):
-                pygame.draw.rect(screen, "white", [(self.left + (self.cell_size * i), self.top + (self.cell_size * j)),
-                                                   (self.cell_size, self.cell_size)], 1)
-
-    def cells_coord(self):
-        interior_list = []
-        for i in range(self.height):
-            for j in range(self.width):
-                coords = (self.cell_size * j + self.left, self.cell_size * i + self.top)
-                interior_list.append(coords)
-        return interior_list
-
 
 kvadrat = [[0, 0, 0, 1, 1, 0, 0, 0],
            [0, 0, 0, 1, 1, 0, 0, 0],
@@ -188,8 +157,6 @@ ygol_v2 = [[0, 0, 1, 1, 1, 0, 0, 0],
            [0, 0, 0, 0, 0, 0, 0, 0],
            [0, 0, 0, 0, 0, 0, 0, 0], ]
 
-
-COORDS = [list1, list2, list3, list4, list5, list6, list7, list8, list9, list10]
 
 while running:
     for event in pygame.event.get():
