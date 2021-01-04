@@ -1,6 +1,6 @@
 import pygame
 
-size = width, height = 450, 650
+size = width, height = 450, 750
 screen = pygame.display.set_mode(size)
 pygame.init()
 pygame.display.set_caption('Tetris')
@@ -36,7 +36,7 @@ class Board:
         return interior_list
 
 
-board = Board(8, 10)
+board = Board(8, 12)
 coords = board.cells_coord()
 list1 = []
 list2 = []
@@ -48,6 +48,8 @@ list7 = []
 list8 = []
 list9 = []
 list10 = []
+list11 = []
+list12 = []
 
 for i in coords:
     if i[1] == 10:
@@ -70,8 +72,13 @@ for i in coords:
         list9.append(i)
     if i[1] == 460:
         list10.append(i)
+    if i[1] == 510:
+        list11.append(i)
+    if i[1] == 560:
+        list12.append(i)
 
-COORDS = [list1, list2, list3, list4, list5, list6, list7, list8, list9, list10]
+COORDS = [list1, list2, list3, list4, list5, list6, list7, list8, list9, list10, list11, list12]
+print(COORDS)
 
 while running:
     for event in pygame.event.get():
