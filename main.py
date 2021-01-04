@@ -27,9 +27,17 @@ class Board:
                 pygame.draw.rect(screen, "white", [(self.left + (self.cell_size * i), self.top + (self.cell_size * j)),
                                                    (self.cell_size, self.cell_size)], 1)
 
+    def cells_coord(self):
+        interior_list = []
+        for i in range(self.height):
+            for j in range(self.width):
+                coords = (self.cell_size * j + self.left, self.cell_size * i + self.top)
+                interior_list.append(coords)
+        return interior_list
+
 
 board = Board(8, 10)
-
+COORDS = board.cells_coord()
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
