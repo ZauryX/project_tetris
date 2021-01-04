@@ -37,7 +37,42 @@ class Board:
 
 
 board = Board(8, 10)
-COORDS = board.cells_coord()
+coords = board.cells_coord()
+list1 = []
+list2 = []
+list3 = []
+list4 = []
+list5 = []
+list6 = []
+list7 = []
+list8 = []
+list9 = []
+list10 = []
+
+for i in coords:
+    if i[1] == 10:
+        list1.append(i)
+    if i[1] == 60:
+        list2.append(i)
+    if i[1] == 110:
+        list3.append(i)
+    if i[1] == 160:
+        list4.append(i)
+    if i[1] == 210:
+        list5.append(i)
+    if i[1] == 260:
+        list6.append(i)
+    if i[1] == 310:
+        list7.append(i)
+    if i[1] == 360:
+        list8.append(i)
+    if i[1] == 410:
+        list9.append(i)
+    if i[1] == 460:
+        list10.append(i)
+
+COORDS = [list1, list2, list3, list4, list5, list6, list7, list8, list9, list10]
+
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
