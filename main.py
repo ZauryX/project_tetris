@@ -5,6 +5,7 @@ screen = pygame.display.set_mode(size)
 pygame.init()
 pygame.display.set_caption('Tetris')
 running = True
+position = [[0] * 8] * 10
 
 
 class Board:
