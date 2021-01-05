@@ -5,6 +5,7 @@ screen = pygame.display.set_mode(size)
 pygame.init()
 pygame.display.set_caption('Tetris')
 running = True
+flag = True
 position = [[0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0],
@@ -53,9 +54,10 @@ def mov_cell():
     global flag
     for i in range(len(position)):
         for j in range(len(position[i])):
-            if position[i][j] == 1 and i != 11:
+            if position[i][j] == 1 and i != 11 and flag:
                 position[i + 1][j] = 1
                 position[i][j] = 0
+                flag = False
     print(position)
 
 
@@ -187,5 +189,6 @@ while running:
     board.render()
     pygame.display.flip()
     mov_cell()
+    flag = True
     clock.tick(100)
 pygame.quit()
