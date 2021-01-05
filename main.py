@@ -5,7 +5,20 @@ screen = pygame.display.set_mode(size)
 pygame.init()
 pygame.display.set_caption('Tetris')
 running = True
-position = [[0] * 8] * 10
+position = [[0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0]]
+clock = pygame.time.Clock()
+position[0][0] = 1
 
 
 class Board:
@@ -34,6 +47,16 @@ class Board:
                 coords = (self.cell_size * j + self.left, self.cell_size * i + self.top)
                 interior_list.append(coords)
         return interior_list
+
+
+def mov_cell():
+    global flag
+    for i in range(len(position)):
+        for j in range(len(position[i])):
+            if position[i][j] == 1 and i != 11:
+                position[i + 1][j] = 1
+                position[i][j] = 0
+    print(position)
 
 
 board = Board(8, 12)
@@ -157,11 +180,12 @@ ygol_v2 = [[0, 0, 1, 1, 1, 0, 0, 0],
            [0, 0, 0, 0, 0, 0, 0, 0],
            [0, 0, 0, 0, 0, 0, 0, 0], ]
 
-
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        board.render()
+    board.render()
     pygame.display.flip()
+    mov_cell()
+    clock.tick(100)
 pygame.quit()
