@@ -21,8 +21,7 @@ position = [[0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]]
 clock = pygame.time.Clock()
 position[0][0] = 1
-speed = 10
-ticks = 0
+
 
 
 class Board:
@@ -67,17 +66,6 @@ def mov_cell():
 class Game(Board):
     def __init__(self, width, height):
         super().__init__(width, height)
-
-    # def render(self):
-    #     for i in range(len(position)):
-    #         for j in range(len(position[i])):
-    #             if position[i][j]:
-    #                 pygame.draw.rect(screen, "green",
-    #                                  [(self.left + (self.cell_size * j), self.top + (self.cell_size * i)),
-    #                                   (self.cell_size, self.cell_size)])
-    #             pygame.draw.rect(screen, "white",
-    #                              [(self.left + (self.cell_size * j), self.top + (self.cell_size * i)),
-    #                               (self.cell_size, self.cell_size)], 1)
 
     def render(self):
         for i in range(len(position)):
@@ -264,15 +252,8 @@ while running:
     screen.fill((0, 0, 0))
     board.render()
     pygame.display.flip()
-    # clock.tick(100)
-    ticks += 1
-    if ticks >= speed:
-        if flag == 1:
-            board.render()
-        ticks = 0
-    board.render()
-    pygame.display.flip()
     mov_cell()
     flag = True
     clock.tick(5)
 pygame.quit()
+
