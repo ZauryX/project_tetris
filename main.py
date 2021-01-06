@@ -1,6 +1,7 @@
 import pygame
+import copy
 
-size = width, height = 450, 750
+size = width, height = 1000, 750
 screen = pygame.display.set_mode(size)
 pygame.init()
 pygame.display.set_caption('Tetris')
@@ -20,6 +21,8 @@ position = [[0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]]
 clock = pygame.time.Clock()
 position[0][0] = 1
+speed = 10
+ticks = 0
 
 
 class Board:
@@ -61,7 +64,59 @@ def mov_cell():
     print(position)
 
 
-board = Board(8, 12)
+class Game(Board):
+    def __init__(self, width, height):
+        super().__init__(width, height)
+
+    # def render(self):
+    #     for i in range(len(position)):
+    #         for j in range(len(position[i])):
+    #             if position[i][j]:
+    #                 pygame.draw.rect(screen, "green",
+    #                                  [(self.left + (self.cell_size * j), self.top + (self.cell_size * i)),
+    #                                   (self.cell_size, self.cell_size)])
+    #             pygame.draw.rect(screen, "white",
+    #                              [(self.left + (self.cell_size * j), self.top + (self.cell_size * i)),
+    #                               (self.cell_size, self.cell_size)], 1)
+
+    def render(self):
+        for i in range(len(position)):
+            for j in range(len(position[i])):
+                if position[i][j] == 1:
+                    pygame.draw.rect(screen, "green",
+                                     [(self.left + (self.cell_size * j), self.top + (self.cell_size * i)),
+                                      (self.cell_size, self.cell_size)])
+                if position == 0:
+                    pygame.draw.rect(screen, "black",
+                                     [(self.left + (self.cell_size * j), self.top + (self.cell_size * i)),
+                                      (self.cell_size, self.cell_size)])
+                pygame.draw.rect(screen, "white",
+                                 [(self.left + (self.cell_size * j), self.top + (self.cell_size * i)),
+                                  (self.cell_size, self.cell_size)], 1)
+
+    def click_on(self, cell):
+        position[cell[1]][cell[0]] = (position[cell[1]][cell[0]] + 1) % 2
+
+    # def next_move(self):
+    #     board_copy = copy.deepcopy(position)
+    #     for i in range(self.width):
+    #         for j in range(self.height):
+    #             s = 0
+    #             for di in [-1, 0, 1]:
+    #                 for dj in [-1, 0, 1]:
+    #                     if 0 <= i + di < self.width and 0 <= j + dj < self.height:
+    #                         s += position[i + di][j + dj]
+    #             s -= position[i][j]
+    #             if s == 3:
+    #                 board_copy[i][j] = 1
+    #             if s < 2 or s > 3:
+    #                 board_copy[i][j] = 0
+    #     position = copy.deepcopy(board_copy)
+
+
+board = Game(8, 12)
+
+# board = Board(8, 12)
 coords = board.cells_coord()
 list1 = []
 list2 = []
@@ -199,13 +254,25 @@ ygol_v23 = [[0, 0, 0, 1, 1, 0, 0, 0],
             [0, 0, 0, 1, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0], ]
 
+position[0], position[1] = kvadrat[0], kvadrat[1]
+
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
+    screen.fill((0, 0, 0))
+    board.render()
+    pygame.display.flip()
+    # clock.tick(100)
+    ticks += 1
+    if ticks >= speed:
+        if flag == 1:
+            board.render()
+        ticks = 0
     board.render()
     pygame.display.flip()
     mov_cell()
     flag = True
-    clock.tick(100)
+    clock.tick(5)
 pygame.quit()
