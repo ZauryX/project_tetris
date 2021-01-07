@@ -1,12 +1,10 @@
 import pygame
-import copy
 
-size = width, height = 1000, 750
+size = width, height = 450, 750
 screen = pygame.display.set_mode(size)
 pygame.init()
 pygame.display.set_caption('Tetris')
 running = True
-flag = True
 position = [[0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0],
@@ -20,8 +18,8 @@ position = [[0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0]]
 clock = pygame.time.Clock()
-position[0][0] = 1
-
+pos = [225, 10]
+list_pos = []
 
 
 class Board:
@@ -50,17 +48,6 @@ class Board:
                 coords = (self.cell_size * j + self.left, self.cell_size * i + self.top)
                 interior_list.append(coords)
         return interior_list
-
-
-def mov_cell():
-    global flag
-    for i in range(len(position)):
-        for j in range(len(position[i])):
-            if position[i][j] == 1 and i != 11 and flag:
-                position[i + 1][j] = 1
-                position[i][j] = 0
-                flag = False
-    print(position)
 
 
 class Game(Board):
@@ -101,10 +88,16 @@ class Game(Board):
     #                 board_copy[i][j] = 0
     #     position = copy.deepcopy(board_copy)
 
+    def mov_fig(self):
+        for i in list_pos:
+            if pos[1] < i and bool(list_pos):
+                pos[1] += self.cell_size
+        if pos[1] < 560 and not bool(list_pos):
+            pos[1] += self.cell_size
+        print(pos)
+
 
 board = Game(8, 12)
-
-# board = Board(8, 12)
 coords = board.cells_coord()
 list1 = []
 list2 = []
@@ -242,18 +235,12 @@ ygol_v23 = [[0, 0, 0, 1, 1, 0, 0, 0],
             [0, 0, 0, 1, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0], ]
 
-position[0], position[1] = kvadrat[0], kvadrat[1]
-
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
-    screen.fill((0, 0, 0))
     board.render()
+    board.mov_fig()
+    clock.tick(100)
     pygame.display.flip()
-    mov_cell()
-    flag = True
-    clock.tick(5)
 pygame.quit()
-
