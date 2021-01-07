@@ -5,18 +5,7 @@ screen = pygame.display.set_mode(size)
 pygame.init()
 pygame.display.set_caption('Tetris')
 running = True
-position = [[0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0]]
+position = []
 clock = pygame.time.Clock()
 pos = [225, 10]
 list_pos = []
@@ -92,9 +81,11 @@ class Game(Board):
         for i in list_pos:
             if pos[1] < i and bool(list_pos):
                 pos[1] += self.cell_size
+                position.append(list(pos))
         if pos[1] < 560 and not bool(list_pos):
             pos[1] += self.cell_size
-        print(pos)
+            position.append(list(pos))
+        print(pos, position)
 
 
 board = Game(8, 12)
