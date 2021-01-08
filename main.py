@@ -43,20 +43,20 @@ class Game(Board):
     def __init__(self, width, height):
         super().__init__(width, height)
 
-    def render(self):
-        for i in range(len(position)):
-            for j in range(len(position[i])):
-                if position[i][j] == 1:
-                    pygame.draw.rect(screen, "green",
-                                     [(self.left + (self.cell_size * j), self.top + (self.cell_size * i)),
-                                      (self.cell_size, self.cell_size)])
-                if position == 0:
-                    pygame.draw.rect(screen, "black",
-                                     [(self.left + (self.cell_size * j), self.top + (self.cell_size * i)),
-                                      (self.cell_size, self.cell_size)])
-                pygame.draw.rect(screen, "white",
-                                 [(self.left + (self.cell_size * j), self.top + (self.cell_size * i)),
-                                  (self.cell_size, self.cell_size)], 1)
+    # def render(self):
+    #     for i in range(len(position)):
+    #         for j in range(len(position[i])):
+    #             if position[i][j] == 1:
+    #                 pygame.draw.rect(screen, "green",
+    #                                  [(self.left + (self.cell_size * j), self.top + (self.cell_size * i)),
+    #                                   (self.cell_size, self.cell_size)])
+    #             if position == 0:
+    #                 pygame.draw.rect(screen, "black",
+    #                                  [(self.left + (self.cell_size * j), self.top + (self.cell_size * i)),
+    #                                   (self.cell_size, self.cell_size)])
+    #             pygame.draw.rect(screen, "white",
+    #                              [(self.left + (self.cell_size * j), self.top + (self.cell_size * i)),
+    #                               (self.cell_size, self.cell_size)], 1)
 
     def click_on(self, cell):
         position[cell[1]][cell[0]] = (position[cell[1]][cell[0]] + 1) % 2
@@ -230,6 +230,15 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        key = pygame.key.get_pressed()
+        if key[pygame.K_DOWN]:
+            pass
+        if key[pygame.K_LEFT]:
+            pass
+        if key[pygame.K_RIGHT]:
+            pass
+        if key[pygame.K_SPACE]:
+            pass
     board.render()
     board.mov_fig()
     clock.tick(100)
