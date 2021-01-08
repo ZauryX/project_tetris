@@ -9,6 +9,7 @@ position = []
 clock = pygame.time.Clock()
 pos = [225, 10]
 list_pos = []
+q = 1
 
 kvadrat = [[[0, 0, 0, 1, 1, 0, 0, 0],
             [0, 0, 0, 1, 1, 0, 0, 0],
