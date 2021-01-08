@@ -1,14 +1,26 @@
 import pygame
+import random
 
-size = width, height = 450, 750
+size = width, height = 450, 650
 screen = pygame.display.set_mode(size)
 pygame.init()
 pygame.display.set_caption('Tetris')
 running = True
-position = []
+position = [[0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0]]
 clock = pygame.time.Clock()
-pos = [225, 10]
-list_pos = []
+# pos = [225, 10]
+# list_pos = []
 
 kvadrat = [[[0, 0, 0, 1, 1, 0, 0, 0],
             [0, 0, 0, 1, 1, 0, 0, 0],
@@ -117,7 +129,37 @@ class Board:
         self.top = 10
         self.cell_size = 50
 
+        fg = random.choice(figyry)
         self.povorot = 0
+        self.color = figyry_colors[figyry.index(fg)]
+
+    def create_grid(locked_positions={}):
+        position = [[0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0, 0]]
+        for i in range(len(position)):
+            for j in range(len(position[i])):
+                if (j, i) in locked_positions:
+                    c = locked_positions[(j, i)]
+                    position[i][j] = c
+        return position
+
+
+
+
+
+
+
+
 
     def set_view(self, left, top, cell_size):
         self.left = left
@@ -158,18 +200,16 @@ class Game(Board):
     #                              [(self.left + (self.cell_size * j), self.top + (self.cell_size * i)),
     #                               (self.cell_size, self.cell_size)], 1)
 
-    # def click_on(self, cell):
-    #     position[cell[1]][cell[0]] = (position[cell[1]][cell[0]] + 1) % 2
 
-    def mov_fig(self):
-        for i in list_pos:
-            if pos[1] < i and bool(list_pos):
-                pos[1] += self.cell_size
-                position.append(list(pos))
-        if pos[1] < 560 and not bool(list_pos):
-            pos[1] += self.cell_size
-            position.append(list(pos))
-        print(pos, position)
+    # def mov_fig(self):
+    #     for i in list_pos:
+    #         if pos[1] < i and bool(list_pos):
+    #             pos[1] += self.cell_size
+    #             position.append(list(pos))
+    #     if pos[1] < 560 and not bool(list_pos):
+    #         pos[1] += self.cell_size
+    #         position.append(list(pos))
+    #     print(pos, position)
 
 
 board = Game(8, 12)
@@ -229,7 +269,7 @@ while running:
         if key[pygame.K_SPACE]:
             pass
     board.render()
-    board.mov_fig()
+    # board.mov_fig()
     clock.tick(5)
     pygame.display.flip()
 pygame.quit()
