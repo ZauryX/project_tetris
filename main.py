@@ -110,13 +110,13 @@ figyry_colors = [(255, 215, 0), (63, 0, 255), (255, 0, 0), (255, 0, 0), (255, 25
 
 
 class Board:
-    def __init__(self, width, height):
+    def __init__(self, width, height, figyra):
         self.width = width
         self.height = height
         self.left = 25
         self.top = 10
         self.cell_size = 50
-
+        self.figyra = figyra
         fg = random.choice(figyry)
         self.povorot = 0
         self.color = figyry_colors[figyry.index(fg)]
@@ -164,36 +164,65 @@ def sozdanie_polya(occupied={}):
 
 
 class Game(Board):
-    def __init__(self, width, height):
-        super().__init__(width, height)
+    def __init__(self, width, height, figyra):
+        super().__init__(width, height, figyra)
 
-    # def render(self):
-    #     for i in range(len(position)):
-    #         for j in range(len(position[i])):
-    #             if position[i][j] == 1:
-    #                 pygame.draw.rect(screen, "green",
-    #                                  [(self.left + (self.cell_size * j), self.top + (self.cell_size * i)),
-    #                                   (self.cell_size, self.cell_size)])
-    #             if position == 0:
-    #                 pygame.draw.rect(screen, "black",
-    #                                  [(self.left + (self.cell_size * j), self.top + (self.cell_size * i)),
-    #                                   (self.cell_size, self.cell_size)])
-    #             pygame.draw.rect(screen, "white",
-    #                              [(self.left + (self.cell_size * j), self.top + (self.cell_size * i)),
-    #                               (self.cell_size, self.cell_size)], 1)
-
-    # def mov_fig(self):
-    #     for i in list_pos:
-    #         if pos[1] < i and bool(list_pos):
-    #             pos[1] += self.cell_size
-    #             position.append(list(pos))
-    #     if pos[1] < 560 and not bool(list_pos):
-    #         pos[1] += self.cell_size
-    #         position.append(list(pos))
-    #     print(pos, position)
+    def render(self):
+        for i in range(len(position)):
+            for j in range(len(position[i])):
+                pygame.draw.rect(screen, position[i][j],
+                                 [(self.left + (self.cell_size * j), self.top + (self.cell_size * i)),
+                                  (self.cell_size, self.cell_size)])
+                pygame.draw.rect(screen, "white",
+                                 [(self.left + (self.cell_size * j), self.top + (self.cell_size * i)),
+                                  (self.cell_size, self.cell_size)], 1)
 
 
-board = Game(8, 12)
+def formatting(figyra):
+    positions = []
+    format = figyra.figyra[figyra.povorot % len(figyra.figyra)]
+
+    for i, line in enumerate(format):
+        for j, column in enumerate(line):
+            if column == '1':
+                positions.append((figyra.x + j, figyra.y + i))
+
+    for i, pos in enumerate(positions):
+        positions[i] = (pos[0] - 2, pos[1] - 4)
+
+    # print(positions)
+
+    return positions
+
+
+def emptiness(figyra, position):
+    empty = []
+    for i in range(12):
+        for j in range(8):
+            if position[i][j] == (0, 0, 0):
+                empty.append(position[i][j])
+    empty = [j for sub in empty for j in sub]
+    formatted = formatting(figyra)
+
+    for x in formatted:
+        if x not in empty:
+            if x[1] > -1:
+                return False
+    return True
+
+
+# def mov_fig(self):
+#     for i in list_pos:
+#         if pos[1] < i and bool(list_pos):
+#             pos[1] += self.cell_size
+#             position.append(list(pos))
+#     if pos[1] < 560 and not bool(list_pos):
+#         pos[1] += self.cell_size
+#         position.append(list(pos))
+#     print(pos, position)
+
+
+board = Game(8, 12, kvadrat)
 coords = board.cells_coord()
 list1 = []
 list2 = []
