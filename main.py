@@ -160,6 +160,9 @@ def sozdanie_polya(occupied={}):
             if (j, i) in occupied:
                 a = occupied[(j, i)]
                 position[i][j] = a
+
+    # position[]
+
     return position
 
 
@@ -178,21 +181,32 @@ class Game(Board):
                                   (self.cell_size, self.cell_size)], 1)
 
 
-def formatting(figyra):
+c = []
+
+count = 0
+
+def formatting(figyra, coords):
+    global count
     positions = []
-    format = figyra.figyra[figyra.povorot % len(figyra.figyra)]
+    # format = figyra.figyra[figyra.povorot % len(figyra.figyra)]
+    format = figyra[0]
+    a, b = coords
 
     for i, line in enumerate(format):
         for j, column in enumerate(line):
-            if column == '1':
-                positions.append((figyra.x + j, figyra.y + i))
+            if column == 1:
+                positions.append((a + 50 * j, b + 50 * i))
+                if count != 4:
+                    count += 1
+                    c.append((((a + 50 * j) - 25) / 50 - 1, ((b + 50 * i) - 10) / 50 - 1))
 
-    for i, pos in enumerate(positions):
-        positions[i] = (pos[0] - 2, pos[1] - 4)
+    # for i, pos in enumerate(positions):
+    #     positions[i] = (pos[0] - 2, pos[1] - 4)
 
     # print(positions)
 
     return positions
+
 
 
 def emptiness(figyra, position):
@@ -264,10 +278,14 @@ for i in coords:
         list12.append(i)
 
 COORDS = [list1, list2, list3, list4, list5, list6, list7, list8, list9, list10, list11, list12]
+# print(COORDS)
+
+coords2 = (25, 60)
 
 while running:
     occupied = {}
     position = sozdanie_polya(occupied)
+    formatting(kvadrat, coords2)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
