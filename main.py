@@ -185,11 +185,14 @@ c = []
 
 count = 0
 
+
 def formatting(figyra, coords):
     global count
     positions = []
     # format = figyra.figyra[figyra.povorot % len(figyra.figyra)]
     format = figyra[0]
+    nomer = figyry.index(figyra)
+    color = figyry_colors[nomer]
     a, b = coords
 
     for i, line in enumerate(format):
@@ -200,13 +203,20 @@ def formatting(figyra, coords):
                     count += 1
                     c.append((((a + 50 * j) - 25) / 50 - 1, ((b + 50 * i) - 10) / 50 - 1))
 
-    # for i, pos in enumerate(positions):
-    #     positions[i] = (pos[0] - 2, pos[1] - 4)
+    # # for i, pos in enumerate(positions):
+    # #     positions[i] = (pos[0] - 2, pos[1] - 4)
 
-    # print(positions)
+    drawing(c, color)
 
     return positions
 
+
+def drawing(coord, color):
+    for i in coord:
+        occupied[i] = color
+    sozdanie_polya(occupied)
+    print(occupied)
+    # return occupied
 
 
 def emptiness(figyra, position):
@@ -237,6 +247,7 @@ def emptiness(figyra, position):
 
 
 board = Game(8, 12, kvadrat)
+# board.render()
 coords = board.cells_coord()
 list1 = []
 list2 = []
@@ -283,7 +294,8 @@ COORDS = [list1, list2, list3, list4, list5, list6, list7, list8, list9, list10,
 coords2 = (25, 60)
 
 while running:
-    occupied = {}
+    occupied = {(2, 0): (255, 0, 22)}
+    # occupied - drawing()
     position = sozdanie_polya(occupied)
     formatting(kvadrat, coords2)
     for event in pygame.event.get():
