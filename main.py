@@ -201,7 +201,7 @@ def formatting(figyra, coords):
                 positions.append((a + 50 * j, b + 50 * i))
                 if count != 4:
                     count += 1
-                    c.append((((a + 50 * j) - 25) / 50 - 1, ((b + 50 * i) - 10) / 50 - 1))
+                    c.append((((a + 50 * j) - 25) / 50, ((b + 50 * i) - 10) / 50))
 
     # # for i, pos in enumerate(positions):
     # #     positions[i] = (pos[0] - 2, pos[1] - 4)
@@ -291,10 +291,10 @@ for i in coords:
 COORDS = [list1, list2, list3, list4, list5, list6, list7, list8, list9, list10, list11, list12]
 # print(COORDS)
 
-coords2 = (25, 60)
+coords2 = (25, 10)
 
 while running:
-    occupied = {(2, 0): (255, 0, 22)}
+    occupied = {}
     # occupied = drawing()
     position = sozdanie_polya(formatting(kvadrat, coords2))
     # formatting(kvadrat, coords2)
