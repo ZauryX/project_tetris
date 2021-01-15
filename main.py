@@ -206,9 +206,9 @@ def formatting(figyra, coords):
     # # for i, pos in enumerate(positions):
     # #     positions[i] = (pos[0] - 2, pos[1] - 4)
 
-    drawing(c, color)
+    # drawing(c, color)
 
-    return positions
+    return drawing(c, color)
 
 
 def drawing(coord, color):
@@ -216,7 +216,7 @@ def drawing(coord, color):
         occupied[i] = color
     sozdanie_polya(occupied)
     print(occupied)
-    # return occupied
+    return occupied
 
 
 def emptiness(figyra, position):
@@ -295,9 +295,9 @@ coords2 = (25, 60)
 
 while running:
     occupied = {(2, 0): (255, 0, 22)}
-    # occupied - drawing()
-    position = sozdanie_polya(occupied)
-    formatting(kvadrat, coords2)
+    # occupied = drawing()
+    position = sozdanie_polya(formatting(kvadrat, coords2))
+    # formatting(kvadrat, coords2)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
