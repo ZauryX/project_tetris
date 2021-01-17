@@ -7,6 +7,7 @@ pygame.init()
 pygame.display.set_caption('Tetris')
 running = True
 clock = pygame.time.Clock()
+fall_time = 0
 # pos = [225, 10]
 # list_pos = []
 
@@ -215,7 +216,7 @@ def drawing(coord, color):
     for i in coord:
         occupied[i] = color
     sozdanie_polya(occupied)
-    print(occupied)
+    # print(occupied)
     return occupied
 
 
@@ -291,12 +292,19 @@ for i in coords:
 COORDS = [list1, list2, list3, list4, list5, list6, list7, list8, list9, list10, list11, list12]
 # print(COORDS)
 
-coords2 = (25, 10)
+coords2 = [25, 10]
+
+
+def moving(coord):
+    coord[1] += 50
+    print(coord)
+
 
 while running:
     occupied = {}
     # occupied = drawing()
     position = sozdanie_polya(formatting(kvadrat, coords2))
+    moving(coords2)
     # formatting(kvadrat, coords2)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -311,7 +319,6 @@ while running:
         if key[pygame.K_SPACE]:
             pass
     board.render()
-    # board.mov_fig()
     clock.tick(5)
     pygame.display.flip()
 pygame.quit()
