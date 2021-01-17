@@ -293,7 +293,7 @@ for i in coords:
 COORDS = [list1, list2, list3, list4, list5, list6, list7, list8, list9, list10, list11, list12]
 # print(COORDS)
 
-coords2 = [25, 10]
+coords2 = [25, -90]
 
 
 def moving(coord):
@@ -321,6 +321,6 @@ while running:
         if key[pygame.K_SPACE]:
             pass
     board.render()
-    clock.tick(5)
+    clock.tick(2)
     pygame.display.flip()
 pygame.quit()
