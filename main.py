@@ -107,7 +107,7 @@ ygol_v2 = [[[0, 0, 0, 1, 1, 1, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0], ]]
 
 figyry = [kvadrat, pryamay, t_obraz, zigzag1, zigzag2, ygol_v1, ygol_v2]
-figyry_colors = [(255, 215, 0), (63, 0, 255), (255, 0, 0), (255, 0, 0), (255, 255, 25), (34, 34, 34), (255, 69, 0)]
+figyry_colors = [(255, 215, 0), (63, 0, 255), (255, 0, 0), (255, 0, 0), (255, 255, 25), (77, 70, 255), (255, 69, 0)]
 
 
 class Board:
@@ -182,7 +182,7 @@ class Game(Board):
                                   (self.cell_size, self.cell_size)], 1)
 
 
-c = []
+
 
 count = 0
 
@@ -192,7 +192,7 @@ def formatting(figyra, coords):
     c = []
     positions = []
     # format = figyra.figyra[figyra.povorot % len(figyra.figyra)]
-    format = figyra[0]
+    format = figyra[2]
     nomer = figyry.index(figyra)
     color = figyry_colors[nomer]
     a, b = coords
@@ -297,15 +297,16 @@ coords2 = [25, -90]
 
 
 def moving(coord):
-    coord[1] += 50
-    print(coord)
+    if coord[1] <= 460:
+        coord[1] += 50
+
     return coord
 
 
 while running:
     occupied = {}
     # occupied = drawing()
-    position = sozdanie_polya(formatting(kvadrat, moving(coords2)))
+    position = sozdanie_polya(formatting(ygol_v1, moving(coords2)))
     # moving(coords2)
     # formatting(kvadrat, coords2)
     for event in pygame.event.get():
