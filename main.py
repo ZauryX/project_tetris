@@ -189,6 +189,7 @@ count = 0
 
 def formatting(figyra, coords):
     global count
+    c = []
     positions = []
     # format = figyra.figyra[figyra.povorot % len(figyra.figyra)]
     format = figyra[0]
@@ -203,12 +204,12 @@ def formatting(figyra, coords):
                 if count != 4:
                     count += 1
                     c.append((((a + 50 * j) - 25) / 50, ((b + 50 * i) - 10) / 50))
-
+    print(c)
     # # for i, pos in enumerate(positions):
     # #     positions[i] = (pos[0] - 2, pos[1] - 4)
 
     # drawing(c, color)
-
+    count = 0
     return drawing(c, color)
 
 
@@ -298,13 +299,14 @@ coords2 = [25, 10]
 def moving(coord):
     coord[1] += 50
     print(coord)
+    return coord
 
 
 while running:
     occupied = {}
     # occupied = drawing()
-    position = sozdanie_polya(formatting(kvadrat, coords2))
-    moving(coords2)
+    position = sozdanie_polya(formatting(kvadrat, moving(coords2)))
+    # moving(coords2)
     # formatting(kvadrat, coords2)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
