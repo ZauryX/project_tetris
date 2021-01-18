@@ -153,7 +153,7 @@ def sozdanie_polya(occupied={}):
         [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
         [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
         [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
-        [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)]]
+        [(0, 0, 3), (0, 0, 3), (0, 0, 3), (0, 0, 3), (255, 0, 3), (255, 0, 3), (255, 0, 3), (255, 7, 3)]]
     for i in range(len(position)):
         for j in range(len(position[i])):
             if (j, i) in occupied:
@@ -223,10 +223,18 @@ def emptiness(figyra, position):
     for i in range(12):
         for j in range(8):
             if position[i][j] == (0, 0, 0):
+                # empty.append(position[i][j])
                 empty.append(position[i][j])
+                # print(empty)
     empty = [j for sub in empty for j in sub]
-    formatted = formatting(figyra)
-
+    formatted = formatting(figyra, coords2)
+    # a, b = formatted
+    qwerty = []
+    for i in formatted:
+       ssd = (i[0], i[1])
+       qwerty.append(ssd)
+    print(qwerty)
+    # print(empty)
     for x in formatted:
         if x not in empty:
             if x[1] > -1:
@@ -331,6 +339,9 @@ while running:
         if key[pygame.K_SPACE]:
             pass
     position = sozdanie_polya(formatting(ygol_v1, moving()))
+    # print(position)
+    qwerty = emptiness(ygol_v1, position)
+    print(qwerty)
     board.render()
     clock.tick(4)
     pygame.display.flip()
