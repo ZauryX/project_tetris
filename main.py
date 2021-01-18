@@ -9,7 +9,6 @@ running = True
 flag = None
 clock = pygame.time.Clock()
 
-
 kvadrat = [[[1, 1, 0, 0, 0, 0, 0, 0],
             [1, 1, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0],
@@ -180,8 +179,6 @@ class Game(Board):
                                   (self.cell_size, self.cell_size)], 1)
 
 
-
-
 count = 0
 
 
@@ -206,6 +203,7 @@ def formatting(figyra, coords):
     # #     positions[i] = (pos[0] - 2, pos[1] - 4)
 
     # drawing(c, color)
+    # print(positions)
     count = 0
     return drawing(c, color)
 
@@ -218,23 +216,35 @@ def drawing(coord, color):
     return occupied
 
 
+def formatirovanie(figyra, coords):
+    positions = []
+    # format = figyra.figyra[figyra.povorot % len(figyra.figyra)]
+    format = figyra[2]
+    a, b = coords
+
+    for i, line in enumerate(format):
+        for j, column in enumerate(line):
+            if column == 1:
+                positions.append((a + 50 * j, b + 50 * i))
+    return positions
+
+
 def emptiness(figyra, position):
     empty = []
     for i in range(12):
         for j in range(8):
             if position[i][j] == (0, 0, 0):
                 # empty.append(position[i][j])
-                empty.append(position[i][j])
-                # print(empty)
-    empty = [j for sub in empty for j in sub]
-    formatted = formatting(figyra, coords2)
-    # a, b = formatted
-    qwerty = []
-    for i in formatted:
-       ssd = (i[0], i[1])
-       qwerty.append(ssd)
-    print(qwerty)
-    # print(empty)
+                empty.append(COORDS[i][j])
+        # print(empty)
+    # empty = [j for sub in empty for j in sub]
+    formatted = formatirovanie(figyra, coords2)
+    # qwerty = []
+    # for i in formatted:
+    #     ssd = (i[0], i[1])
+    #     qwerty.append(ssd)
+    print(formatted)
+    print(empty)
     for x in formatted:
         if x not in empty:
             if x[1] > -1:
@@ -308,16 +318,17 @@ def moving():
 
     return coords2
 
+
 def mov_xr():
     global coords2
     if coords2[0] >= 25 and coords2[0] != 475:
         coords2[0] += 50
 
+
 def mov_xl():
     global coords2
     if coords2[0] >= 25 and coords2[0] <= 475:
         coords2[0] -= 50
-
 
 
 while running:
