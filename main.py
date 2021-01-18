@@ -322,7 +322,7 @@ while running:
         if key[pygame.K_LEFT]:
             pass
         if key[pygame.K_RIGHT]:
-            pass
+            mov_x()
         if key[pygame.K_SPACE]:
             pass
     position = sozdanie_polya(formatting(ygol_v1, moving()))
