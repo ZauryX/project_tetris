@@ -6,10 +6,9 @@ screen = pygame.display.set_mode(size)
 pygame.init()
 pygame.display.set_caption('Tetris')
 running = True
+flag = None
 clock = pygame.time.Clock()
-fall_time = 0
-# pos = [225, 10]
-# list_pos = []
+
 
 kvadrat = [[[0, 0, 0, 1, 1, 0, 0, 0],
             [0, 0, 0, 1, 1, 0, 0, 0],
@@ -204,7 +203,6 @@ def formatting(figyra, coords):
                 if count != 4:
                     count += 1
                     c.append((((a + 50 * j) - 25) / 50, ((b + 50 * i) - 10) / 50))
-    print(c)
     # # for i, pos in enumerate(positions):
     # #     positions[i] = (pos[0] - 2, pos[1] - 4)
 
@@ -296,17 +294,18 @@ COORDS = [list1, list2, list3, list4, list5, list6, list7, list8, list9, list10,
 coords2 = [25, -90]
 
 
-def moving(coord):
-    if coord[1] <= 460:
-        coord[1] += 50
+def moving():
+    global coords2
+    if coords2[1] <= 460:
+        coords2[1] += 50
 
-    return coord
+    return coords2
 
 
 while running:
     occupied = {}
     # occupied = drawing()
-    position = sozdanie_polya(formatting(ygol_v1, moving(coords2)))
+    position = sozdanie_polya(formatting(ygol_v1, moving()))
     # moving(coords2)
     # formatting(kvadrat, coords2)
     for event in pygame.event.get():
@@ -322,6 +321,6 @@ while running:
         if key[pygame.K_SPACE]:
             pass
     board.render()
-    clock.tick(2)
+    clock.tick(1)
     pygame.display.flip()
 pygame.quit()
