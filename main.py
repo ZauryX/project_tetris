@@ -226,6 +226,7 @@ def formatirovanie(figyra, coords):
         for j, column in enumerate(line):
             if column == 1:
                 positions.append((a + 50 * j, b + 50 * i))
+    print(positions, 'titan')
     return positions
 
 
@@ -236,19 +237,13 @@ def emptiness(figyra, position):
             if position[i][j] == (0, 0, 0):
                 # empty.append(position[i][j])
                 empty.append(COORDS[i][j])
-        # print(empty)
-    # empty = [j for sub in empty for j in sub]
+                # print(empty)
     formatted = formatirovanie(figyra, coords2)
-    # qwerty = []
-    # for i in formatted:
-    #     ssd = (i[0], i[1])
-    #     qwerty.append(ssd)
-    print(formatted)
     print(empty)
     for x in formatted:
         if x not in empty:
-            if x[1] > -1:
-                return False
+            # if x[1] > -1:
+            return False
     return True
 
 
@@ -352,7 +347,7 @@ while running:
     position = sozdanie_polya(formatting(ygol_v1, moving()))
     # print(position)
     qwerty = emptiness(ygol_v1, position)
-    print(qwerty)
+    # print(qwerty)
     board.render()
     clock.tick(4)
     pygame.display.flip()
