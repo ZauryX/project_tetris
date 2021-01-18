@@ -307,7 +307,7 @@ def mov_xr():
 
 def mov_xl():
     global coords2
-    if coords2[0] >= 25 and coords2[0] != 475:
+    if coords2[0] >= 25 and coords2[0] <= 475:
         coords2[0] -= 50
 
 
@@ -332,6 +332,6 @@ while running:
             pass
     position = sozdanie_polya(formatting(ygol_v1, moving()))
     board.render()
-    clock.tick(1)
+    clock.tick(4)
     pygame.display.flip()
 pygame.quit()
