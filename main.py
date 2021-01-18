@@ -300,10 +300,15 @@ def moving():
 
     return coords2
 
-def mov_x():
+def mov_xr():
     global coords2
-    if coords2[0] >= 25 or coords2[0] != 425:
+    if coords2[0] >= 25 and coords2[0] != 475:
         coords2[0] += 50
+
+def mov_xl():
+    global coords2
+    if coords2[0] >= 25 and coords2[0] != 475:
+        coords2[0] -= 50
 
 
 
@@ -320,9 +325,9 @@ while running:
         if key[pygame.K_DOWN]:
             pass
         if key[pygame.K_LEFT]:
-            pass
+            mov_xl()
         if key[pygame.K_RIGHT]:
-            mov_x()
+            mov_xr()
         if key[pygame.K_SPACE]:
             pass
     position = sozdanie_polya(formatting(ygol_v1, moving()))
