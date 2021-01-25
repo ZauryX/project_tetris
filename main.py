@@ -248,7 +248,7 @@ def formatirovanie(figyra, coords):
 def emptiness(position):
     global c1
     for i in c1:
-        if i[1] != 11:
+        if i[1] >= 10:
             print(i)
             if position[i[1] + 1][i[0]] != (0, 0, 0) and (i[0], i[1] + 1) not in c1:
                 print(True)
@@ -345,7 +345,7 @@ def mov_xl():
 fall_time = 0
 while running:
     occupied = {}
-    global position
+
     # occupied = drawing()
 
     # moving(coords2)
@@ -363,7 +363,7 @@ while running:
             mov_xr()
         if key[pygame.K_SPACE]:
             pass
-    position = sozdanie_polya(formatting(ygol_v1, moving(position)))
+    position = sozdanie_polya(formatting(ygol_v1, moving()))
     # print(position)
     # qwerty = emptiness(ygol_v1, position)
     # print(qwerty)
