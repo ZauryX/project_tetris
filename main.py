@@ -152,7 +152,7 @@ def sozdanie_polya(occupied={}):
         [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
         [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
         [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
-        [(0, 0, 3), (0, 0, 3), (0, 0, 3), (0, 0, 3), (255, 0, 3), (255, 0, 3), (255, 0, 3), (255, 7, 3)]]
+        [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (255, 0, 3), (255, 0, 3), (255, 0, 3), (255, 7, 3)]]
     for i in range(len(position)):
         for j in range(len(position[i])):
             if (j, i) in occupied:
@@ -199,7 +199,7 @@ def formatting(figyra, coords):
                 positions.append((a + 50 * j, b + 50 * i))
                 if count != 4:
                     count += 1
-                    c.append((((a + 50 * j) - 25) / 50, ((b + 50 * i) - 10) / 50))
+                    c.append((((a + 50 * j) - 25) // 50, ((b + 50 * i) - 10) // 50))
                     c1 = c
     # # for i, pos in enumerate(positions):
     # #     positions[i] = (pos[0] - 2, pos[1] - 4)
@@ -234,7 +234,14 @@ def formatirovanie(figyra, coords):
 
 def emptiness(figyra, position):
     global c1
-    print(c1)
+    for i in c1:
+        if i[1] != 11:
+            print(i)
+            if position[i[1] + 1][i[0]] != (0, 0, 0) and (i[0], i[1] + 1) not in c1:
+                print(True)
+            else:
+                print(False)
+
     # empty = []
     # for i in range(12):
     #     for j in range(8):
