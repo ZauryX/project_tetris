@@ -8,6 +8,19 @@ pygame.display.set_caption('Tetris')
 running = True
 flag = None
 clock = pygame.time.Clock()
+position = [
+    [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
+    [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
+    [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
+    [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
+    [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
+    [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
+    [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
+    [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
+    [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
+    [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
+    [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
+    [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (255, 0, 3), (255, 0, 3), (255, 0, 3), (255, 7, 3)]]
 
 kvadrat = [[[1, 1, 0, 0, 0, 0, 0, 0],
             [1, 1, 0, 0, 0, 0, 0, 0],
@@ -232,15 +245,17 @@ def formatirovanie(figyra, coords):
     return positions
 
 
-def emptiness(figyra, position):
+def emptiness(position):
     global c1
     for i in c1:
         if i[1] != 11:
             print(i)
             if position[i[1] + 1][i[0]] != (0, 0, 0) and (i[0], i[1] + 1) not in c1:
                 print(True)
+                return True
             else:
                 print(False)
+    return False
 
     # empty = []
     # for i in range(12):
@@ -256,17 +271,6 @@ def emptiness(figyra, position):
     #         # if x[1] > -1:
     #         return False
     # return True
-
-
-# def mov_fig(self):
-#     for i in list_pos:
-#         if pos[1] < i and bool(list_pos):
-#             pos[1] += self.cell_size
-#             position.append(list(pos))
-#     if pos[1] < 560 and not bool(list_pos):
-#         pos[1] += self.cell_size
-#         position.append(list(pos))
-#     print(pos, position)
 
 
 board = Game(8, 12, kvadrat)
@@ -319,7 +323,8 @@ coords2 = [175, -90]
 
 def moving():
     global coords2
-    if coords2[1] <= 460:
+    # if coords2[1] <= 460:
+    if not emptiness(position):
         coords2[1] += 50
 
     return coords2
@@ -337,12 +342,15 @@ def mov_xl():
         coords2[0] -= 50
 
 
+fall_time = 0
 while running:
     occupied = {}
+    global position
     # occupied = drawing()
 
     # moving(coords2)
     # formatting(kvadrat, coords2)
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -355,9 +363,9 @@ while running:
             mov_xr()
         if key[pygame.K_SPACE]:
             pass
-    position = sozdanie_polya(formatting(ygol_v1, moving()))
+    position = sozdanie_polya(formatting(ygol_v1, moving(position)))
     # print(position)
-    qwerty = emptiness(ygol_v1, position)
+    # qwerty = emptiness(ygol_v1, position)
     # print(qwerty)
     board.render()
     clock.tick(4)
