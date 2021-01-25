@@ -180,10 +180,11 @@ class Game(Board):
 
 
 count = 0
+c1 = []
 
 
 def formatting(figyra, coords):
-    global count
+    global count, c1
     c = []
     positions = []
     # format = figyra.figyra[figyra.povorot % len(figyra.figyra)]
@@ -199,6 +200,7 @@ def formatting(figyra, coords):
                 if count != 4:
                     count += 1
                     c.append((((a + 50 * j) - 25) / 50, ((b + 50 * i) - 10) / 50))
+                    c1 = c
     # # for i, pos in enumerate(positions):
     # #     positions[i] = (pos[0] - 2, pos[1] - 4)
 
@@ -231,20 +233,22 @@ def formatirovanie(figyra, coords):
 
 
 def emptiness(figyra, position):
-    empty = []
-    for i in range(12):
-        for j in range(8):
-            if position[i][j] == (0, 0, 0):
-                # empty.append(position[i][j])
-                empty.append(COORDS[i][j])
-                # print(empty)
-    formatted = formatirovanie(figyra, coords2)
-    print(empty)
-    for x in formatted:
-        if x not in empty:
-            # if x[1] > -1:
-            return False
-    return True
+    global c1
+    print(c1)
+    # empty = []
+    # for i in range(12):
+    #     for j in range(8):
+    #         if position[i][j] == (0, 0, 0):
+    #             # empty.append(position[i][j])
+    #             empty.append(COORDS[i][j])
+    #             # print(empty)
+    # formatted = formatirovanie(figyra, coords2)
+    # print(empty)
+    # for x in formatted:
+    #     if x not in empty:
+    #         # if x[1] > -1:
+    #         return False
+    # return True
 
 
 # def mov_fig(self):
