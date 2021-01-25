@@ -171,7 +171,6 @@ def sozdanie_polya(occupied={}):
             if (j, i) in occupied:
                 a = occupied[(j, i)]
                 position[i][j] = a
-
     # position[]
 
     return position
@@ -201,7 +200,7 @@ def formatting(figyra, coords):
     c = []
     positions = []
     # format = figyra.figyra[figyra.povorot % len(figyra.figyra)]
-    format = figyra[2]
+    format = figyra[0]
     nomer = figyry.index(figyra)
     color = figyry_colors[nomer]
     a, b = coords
@@ -247,11 +246,13 @@ def formatirovanie(figyra, coords):
 
 def emptiness(position):
     global c1
+    global change_fig
     for i in c1:
         if i[1] != 11:
             print(i)
             if position[i[1] + 1][i[0]] != (0, 0, 0) and (i[0], i[1] + 1) not in c1:
                 print(True)
+                change_fig = True
                 return True
             else:
                 print(False)
@@ -342,10 +343,10 @@ def mov_xl():
         coords2[0] -= 50
 
 
+change_fig = True
 fall_time = 0
 while running:
     occupied = {}
-    global position
     # occupied = drawing()
 
     # moving(coords2)
@@ -363,7 +364,16 @@ while running:
             mov_xr()
         if key[pygame.K_SPACE]:
             pass
-    position = sozdanie_polya(formatting(ygol_v1, moving(position)))
+
+
+    if change_fig == True:
+        figyra = random.choice(figyry)
+        position = sozdanie_polya(formatting(figyra, moving()))
+        change_fig = False
+    elif change_fig == False:
+        position = sozdanie_polya(formatting(figyra, moving()))
+
+
     # print(position)
     # qwerty = emptiness(ygol_v1, position)
     # print(qwerty)
