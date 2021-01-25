@@ -365,7 +365,6 @@ while running:
         if key[pygame.K_SPACE]:
             pass
 
-
     if change_fig == True:
         figyra = random.choice(figyry)
         position = sozdanie_polya(formatting(figyra, moving()))
@@ -373,9 +372,8 @@ while running:
     elif change_fig == False:
         position = sozdanie_polya(formatting(figyra, moving()))
 
-
     # print(position)
-    # qwerty = emptiness(ygol_v1, position)
+    qwerty = emptiness(ygol_v1, position)
     # print(qwerty)
     board.render()
     clock.tick(4)
