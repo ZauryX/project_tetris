@@ -117,7 +117,7 @@ ygol_v2 = [[[1, 1, 1, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0], ]]
 
 figyry = [kvadrat, pryamay, t_obraz, zigzag1, zigzag2, ygol_v1, ygol_v2]
-figyry_colors = [(255, 215, 0), (63, 0, 255), (255, 0, 0), (255, 0, 0), (255, 255, 25), (77, 70, 255), (255, 69, 0)]
+figyry_colors = [(255, 215, 0), (63, 0, 255), (255, 0, 0), (255, 0, 0), (0, 255, 0), (77, 70, 255), (255, 69, 0)]
 
 
 class Board:
@@ -230,18 +230,18 @@ def drawing(coord, color):
     return occupied
 
 
-def formatirovanie(figyra, coords):
-    positions = []
-    # format = figyra.figyra[figyra.povorot % len(figyra.figyra)]
-    format = figyra[2]
-    a, b = coords
-
-    for i, line in enumerate(format):
-        for j, column in enumerate(line):
-            if column == 1:
-                positions.append((a + 50 * j, b + 50 * i))
-    print(positions, 'titan')
-    return positions
+# def formatirovanie(figyra, coords):
+#     positions = []
+#     # format = figyra.figyra[figyra.povorot % len(figyra.figyra)]
+#     format = figyra[0]
+#     a, b = coords
+#
+#     for i, line in enumerate(format):
+#         for j, column in enumerate(line):
+#             if column == 1:
+#                 positions.append((a + 50 * j, b + 50 * i))
+#     print(positions, 'titan')
+#     return positions
 
 
 def emptiness(position):
@@ -249,13 +249,12 @@ def emptiness(position):
     global change_fig
     for i in c1:
         if i[1] != 11:
-            print(i)
             if position[i[1] + 1][i[0]] != (0, 0, 0) and (i[0], i[1] + 1) not in c1:
-                print(True)
+                # print(True)
                 change_fig = True
                 return True
-            else:
-                print(False)
+            # else:
+            # print(False)
     return False
 
     # empty = []
@@ -343,6 +342,8 @@ def mov_xl():
         coords2[0] -= 50
 
 
+figyra = zigzag1
+dict_of_occ = {}
 change_fig = True
 fall_time = 0
 while running:
@@ -366,10 +367,20 @@ while running:
             pass
 
     if change_fig == True:
+        nomer = figyry.index(figyra)
+        color = figyry_colors[nomer]
+        for i in c1:
+            dict_of_occ[i] = color
+        # print(dict_of_occ)
+        # print(occupied, 'titan')
+        occupied.update(dict_of_occ)
+        # print(occupied, 'hunter')
         figyra = random.choice(figyry)
+        coords2 = [175, -90]
         position = sozdanie_polya(formatting(figyra, moving()))
         change_fig = False
     elif change_fig == False:
+        occupied.update(dict_of_occ)
         position = sozdanie_polya(formatting(figyra, moving()))
 
     # print(position)
