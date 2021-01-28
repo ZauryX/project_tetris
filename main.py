@@ -325,7 +325,7 @@ def moving():
     global coords2
     # if coords2[1] <= 460:
     if not emptiness(position):
-        coords2[1] += 50
+        coords2[1] += 10
 
     return coords2
 
@@ -346,6 +346,9 @@ figyra = zigzag1
 dict_of_occ = {}
 change_fig = True
 fall_time = 0
+
+
+
 while running:
     occupied = {}
     # occupied = drawing()
@@ -371,10 +374,7 @@ while running:
         color = figyry_colors[nomer]
         for i in c1:
             dict_of_occ[i] = color
-        # print(dict_of_occ)
-        # print(occupied, 'titan')
         occupied.update(dict_of_occ)
-        # print(occupied, 'hunter')
         figyra = random.choice(figyry)
         coords2 = [175, -90]
         position = sozdanie_polya(formatting(figyra, moving()))
@@ -387,6 +387,6 @@ while running:
     # qwerty = emptiness(ygol_v1, position)
     # print(qwerty)
     board.render()
-    clock.tick(4)
+    clock.tick(20)
     pygame.display.flip()
 pygame.quit()
