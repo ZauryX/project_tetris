@@ -121,13 +121,12 @@ figyry_colors = [(255, 215, 0), (63, 0, 255), (255, 0, 0), (255, 0, 0), (0, 255,
 
 
 class Board:
-    def __init__(self, width, height, figyra):
+    def __init__(self, width, height):
         self.width = width
         self.height = height
         self.left = 25
         self.top = 10
         self.cell_size = 50
-        self.figyra = figyra
         fg = random.choice(figyry)
         self.povorot = 0
         self.color = figyry_colors[figyry.index(fg)]
@@ -178,8 +177,8 @@ def sozdanie_polya(occupied={}):
 
 
 class Game(Board):
-    def __init__(self, width, height, figyra):
-        super().__init__(width, height, figyra)
+    def __init__(self, width, height):
+        super().__init__(width, height)
 
     def render(self):
         for i in range(len(position)):
@@ -296,7 +295,7 @@ def clearing_rows():
     #             occupied[newKey] = occupied.pop(key)
 
 
-board = Game(8, 12, kvadrat)
+board = Game(8, 12)
 coords = board.cells_coord()
 list1 = []
 list2 = []
