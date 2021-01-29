@@ -164,14 +164,13 @@ def sozdanie_polya(occupied={}):
         [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
         [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
         [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
-        [(255, 0, 3), (255, 0, 3), (255, 0, 3), (0, 0, 0), (255, 0, 3), (255, 0, 3), (255, 0, 3), (255, 7, 3)]]
+        [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],]
+        # [(255, 0, 3), (255, 0, 3), (255, 0, 3), (0, 0, 0), (255, 0, 3), (255, 0, 3), (255, 0, 3), (255, 7, 3)]]
     for i in range(len(position)):
         for j in range(len(position[i])):
             if (j, i) in occupied:
                 a = occupied[(j, i)]
                 position[i][j] = a
-
-
 
     return position
 
@@ -243,6 +242,9 @@ def emptiness(position):
     global c1
     global change_fig
     for i in c1:
+        if i[1] == 11:
+            change_fig = True
+            return True
         if i[1] != 11:
             if position[i[1] + 1][i[0]] != (0, 0, 0) and (i[0], i[1] + 1) not in c1:
                 # print(True)
@@ -285,7 +287,6 @@ def clearing_rows():
                     del dict_of_occ[(j, i)]
                 except:
                     continue
-
 
     # if count111 > 0:
     #     for key in sorted(list(occupied), key=lambda x: x[1])[::-1]:
