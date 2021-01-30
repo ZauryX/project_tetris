@@ -7,6 +7,8 @@ pygame.init()
 pygame.display.set_caption('Tetris')
 running = True
 flag = None
+flag_movr = True
+flag_movl = True
 clock = pygame.time.Clock()
 position = [
     [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
@@ -239,9 +241,15 @@ def drawing(coord, color):
 
 
 def emptiness(position):
-    global c1
+    global c1, flag_movr, flag_movl
     global change_fig
+    flag_movl = True
+    flag_movr = True
     for i in c1:
+        if i[0] == 0:
+            flag_movl = False
+        if i[0] == 7:
+            flag_movr = False
         if i[1] == 11:
             change_fig = True
             return True
@@ -354,13 +362,13 @@ def moving():
 
 def mov_xr():
     global coords2
-    if coords2[0] >= 25 and coords2[0] != 475:
+    if coords2[0] >= 25 and coords2[0] != 475 and flag_movr:
         coords2[0] += 50
 
 
 def mov_xl():
     global coords2
-    if coords2[0] >= 25 and coords2[0] <= 475:
+    if coords2[0] >= 25 and coords2[0] <= 475 and flag_movl:
         coords2[0] -= 50
 
 
