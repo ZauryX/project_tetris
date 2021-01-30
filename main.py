@@ -246,6 +246,11 @@ def emptiness(position):
     flag_movl = True
     flag_movr = True
     for i in c1:
+        if i[0] < 6 and i[0] > 0:
+            if position[i[1]][i[0] + 1] != (0, 0, 0) and (i[0] + 1, i[1]) not in c1:
+                flag_movr = False
+            if position[i[1]][i[0] - 1] != (0, 0, 0) and (i[0] - 1, i[1]) not in c1:
+                flag_movl = False
         if i[0] == 0:
             flag_movl = False
         if i[0] == 7:
