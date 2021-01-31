@@ -287,7 +287,7 @@ def clearing_rows():
         #         dict_of_occ[newKey] = dict_of_occ.pop(key)
 
 
-def cleaning(position):
+def cleaning(position):           #не работает
     for i in position:
         i[0] = [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)]
 
@@ -367,16 +367,22 @@ def povorot():
         count_pov += 1
     else:
         count_pov = 0
-    if figyra == pryamay:
-        for i in c1:
+    for i in c1:
+        if figyra == pryamay:
+            if i[0] < 4:
+                if flag_movl:
+                    format = figyra[count_pov]
+            if i[0] > 3:
+                if flag_movr:
+                    format = figyra[count_pov]
+        else:
             if i[0] < 5:
                 if flag_movl:
                     format = figyra[count_pov]
             if i[0] > 3:
                 if flag_movr:
                     format = figyra[count_pov]
-    else:
-        format = figyra[count_pov]
+    # format = figyra[count_pov]
 
 
 figyra = kvadrat
