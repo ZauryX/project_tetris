@@ -43,9 +43,9 @@ t_obraz = [[[0, 1, 0, 0, 0, 0, 0, 0],
             [0, 1, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0], ],
 
-           [[0, 0, 0, 0, 0, 0, 0, 0],
+           [[0, 1, 0, 0, 0, 0, 0, 0],
             [1, 1, 1, 0, 0, 0, 0, 0],
-            [0, 1, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0], ],
 
            [[1, 0, 0, 0, 0, 0, 0, 0],
@@ -53,10 +53,10 @@ t_obraz = [[[0, 1, 0, 0, 0, 0, 0, 0],
             [1, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0], ],
 
-           [[0, 1, 0, 0, 0, 0, 0, 0],
+           [[0, 0, 0, 0, 0, 0, 0, 0],
             [1, 1, 1, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0], ]]
+            [0, 1, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0], ], ]
 
 zigzag1 = [[[0, 1, 0, 0, 0, 0, 0, 0],
             [1, 1, 0, 0, 0, 0, 0, 0],
@@ -287,6 +287,11 @@ def clearing_rows():
         #         dict_of_occ[newKey] = dict_of_occ.pop(key)
 
 
+def cleaning(position):
+    for i in position:
+        i[0] = [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)]
+
+
 board = Game(8, 12)
 coords = board.cells_coord()
 list1 = []
@@ -359,10 +364,19 @@ def povorot():
     global format
     global count_pov
     if count_pov < len(figyra) - 1:
-            count_pov += 1
+        count_pov += 1
     else:
         count_pov = 0
-    format = figyra[count_pov]
+    if figyra == pryamay:
+        for i in c1:
+            if i[0] < 5:
+                if flag_movl:
+                    format = figyra[count_pov]
+            if i[0] > 3:
+                if flag_movr:
+                    format = figyra[count_pov]
+    else:
+        format = figyra[count_pov]
 
 
 figyra = kvadrat
@@ -402,11 +416,11 @@ while running:
         clearing_rows()
         coords2 = [175, -90]
         position = sozdanie_polya(formatting(figyra, moving()))
+        # cleaning(position)
         change_fig = False
     elif change_fig == False:
         occupied.update(dict_of_occ)
         position = sozdanie_polya(formatting(figyra, moving()))
-
 
     board.render()
     clock.tick(20)
