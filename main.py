@@ -201,7 +201,7 @@ def formatting(figyra, coords):
     c = []
     positions = []
     # format = figyra.figyra[figyra.povorot % len(figyra.figyra)]
-    format = figyra[0]
+    # format = figyra[0]
     nomer = figyry.index(figyra)
     color = figyry_colors[nomer]
     a, b = coords
@@ -225,19 +225,6 @@ def drawing(coord, color):
     sozdanie_polya(occupied)
     # print(occupied)
     return occupied
-
-
-# def formatirovanie(figyra, coords):
-#     positions = []
-#     format = figyra[0]
-#     a, b = coords
-#
-#     for i, line in enumerate(format):
-#         for j, column in enumerate(line):
-#             if column == 1:
-#                 positions.append((a + 50 * j, b + 50 * i))
-#     print(positions, 'titan')
-#     return positions
 
 
 def emptiness(position):
@@ -267,21 +254,6 @@ def emptiness(position):
             # print(False)
     return False
 
-    # empty = []
-    # for i in range(12):
-    #     for j in range(8):
-    #         if position[i][j] == (0, 0, 0):
-    #             # empty.append(position[i][j])
-    #             empty.append(COORDS[i][j])
-    #             # print(empty)
-    # formatted = formatirovanie(figyra, coords2)
-    # print(empty)
-    # for x in formatted:
-    #     if x not in empty:
-    #         # if x[1] > -1:
-    #         return False
-    # return True
-
 
 def clearing_rows():
     count111 = 0
@@ -289,7 +261,7 @@ def clearing_rows():
     #     if (0, 0, 0) not in i:
     #         print('titan', count111)
 
-    for i in range(len(position)):
+    for i in range(len(position) - 1, -1, -1):
         row = position[i]
         if (0, 0, 0) not in row:
             count111 += 1
@@ -301,12 +273,18 @@ def clearing_rows():
                 except:
                     continue
 
-    # if count111 > 0:
-    #     for key in sorted(list(occupied), key=lambda x: x[1])[::-1]:
-    #         x, y = key
-    #         if y < ind:
-    #             newKey = (x, y + count111)
-    #             occupied[newKey] = occupied.pop(key)
+    if count111 > 0:
+        for key in sorted(list(occupied), key=lambda x: x[1])[::-1]:
+            x, y = key
+            if y < ind:
+                newKey = (x, y + count111)
+                occupied[newKey] = occupied.pop(key)
+                dict_of_occ[newKey] = dict_of_occ.pop(key)
+        # for key in sorted(list(dict_of_occ), key=lambda x: x[1])[::-1]:
+        #     x, y = key
+        #     if y < ind:
+        #         newKey = (x, y + count111)
+        #         dict_of_occ[newKey] = dict_of_occ.pop(key)
 
 
 board = Game(8, 12)
@@ -377,10 +355,21 @@ def mov_xl():
         coords2[0] -= 50
 
 
-figyra = zigzag1
+def povorot():
+    global format
+    global count_pov
+    if count_pov < len(figyra) - 1:
+            count_pov += 1
+    else:
+        count_pov = 0
+    format = figyra[count_pov]
+
+
+figyra = kvadrat
 dict_of_occ = {}
 change_fig = True
 fall_time = 0
+count_pov = 0
 
 while running:
     occupied = {}
@@ -399,8 +388,8 @@ while running:
             mov_xl()
         if key[pygame.K_RIGHT]:
             mov_xr()
-        if key[pygame.K_SPACE]:
-            pass
+        if key[pygame.K_UP]:
+            povorot()
 
     if change_fig == True:
         nomer = figyry.index(figyra)
@@ -409,6 +398,7 @@ while running:
             dict_of_occ[i] = color
         occupied.update(dict_of_occ)
         figyra = random.choice(figyry)
+        format = figyra[0]
         clearing_rows()
         coords2 = [175, -90]
         position = sozdanie_polya(formatting(figyra, moving()))
@@ -417,9 +407,7 @@ while running:
         occupied.update(dict_of_occ)
         position = sozdanie_polya(formatting(figyra, moving()))
 
-    # print(position)
-    # qwerty = emptiness(ygol_v1, position)
-    # print(qwerty)
+
     board.render()
     clock.tick(20)
     pygame.display.flip()
