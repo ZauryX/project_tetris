@@ -28,10 +28,10 @@ kvadrat = [[[1, 1, 0, 0, 0, 0, 0, 0],
             [1, 1, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0], ]]
-pryamay = [[[1, 0, 0, 0, 0, 0, 0, 0],
-            [1, 0, 0, 0, 0, 0, 0, 0],
-            [1, 0, 0, 0, 0, 0, 0, 0],
-            [1, 0, 0, 0, 0, 0, 0, 0], ],
+pryamay = [[[0, 1, 0, 0, 0, 0, 0, 0],
+            [0, 1, 0, 0, 0, 0, 0, 0],
+            [0, 1, 0, 0, 0, 0, 0, 0],
+            [0, 1, 0, 0, 0, 0, 0, 0], ],
 
            [[0, 0, 0, 0, 0, 0, 0, 0],
             [1, 1, 1, 1, 0, 0, 0, 0],
@@ -273,13 +273,15 @@ def clearing_rows():
                 except:
                     continue
 
-    if count111 > 0:
-        for key in sorted(list(occupied), key=lambda x: x[1])[::-1]:
-            x, y = key
-            if y < ind:
-                newKey = (x, y + count111)
-                occupied[newKey] = occupied.pop(key)
-                dict_of_occ[newKey] = dict_of_occ.pop(key)
+    # if count111 > 0:                                         #проблема здесь, когда оно заккоментировано, всё норм
+    #     for key in sorted(list(occupied), key=lambda x: x[1])[::-1]:
+    #         x, y = key
+    #         if y < ind:
+    #             newKey = (x, y + count111)
+    #             occupied[newKey] = occupied.pop(key)
+    #             dict_of_occ[newKey] = dict_of_occ.pop(key)
+
+
         # for key in sorted(list(dict_of_occ), key=lambda x: x[1])[::-1]:
         #     x, y = key
         #     if y < ind:
@@ -427,6 +429,7 @@ while running:
     else:
         occupied.update(dict_of_occ)
         position = sozdanie_polya(formatting(figyra, moving()))
+
 
     board.render()
     clock.tick(20)
