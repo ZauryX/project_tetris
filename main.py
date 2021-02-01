@@ -372,7 +372,7 @@ def povorot():
             if i[0] < 4:
                 if flag_movl:
                     format = figyra[count_pov]
-            if i[0] > 3:
+            if i[0] > 2:
                 if flag_movr:
                     format = figyra[count_pov]
         else:
@@ -424,7 +424,7 @@ while running:
         position = sozdanie_polya(formatting(figyra, moving()))
         # cleaning(position)
         change_fig = False
-    elif change_fig == False:
+    else:
         occupied.update(dict_of_occ)
         position = sozdanie_polya(formatting(figyra, moving()))
 
