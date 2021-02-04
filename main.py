@@ -297,6 +297,8 @@ def cleaning(position):           #не работает
         # print(i)
         if i[1] == 0:
             dict_of_occ[i] = (0, 0, 0)
+        if i[1] == 1:
+            dict_of_occ[i] = (0, 0, 0)
     for i in position:
         i[0] = [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)]
 
