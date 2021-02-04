@@ -273,13 +273,16 @@ def clearing_rows():
                 except:
                     continue
 
-    # if count111 > 0:                                         #проблема здесь, когда оно заккоментировано, всё норм
-    #     for key in sorted(list(occupied), key=lambda x: x[1])[::-1]:
-    #         x, y = key
-    #         if y < ind:
-    #             newKey = (x, y + count111)
-    #             occupied[newKey] = occupied.pop(key)
-    #             dict_of_occ[newKey] = dict_of_occ.pop(key)
+    if count111 > 0:                                         #проблема здесь, когда оно заккоментировано, всё норм
+        for key in sorted(list(occupied), key=lambda x: x[1])[::-1]:
+            x, y = key
+            if y < ind:
+                # print(key, 'titan')
+                newKey = (x, y + count111)
+                # print(newKey)
+
+                occupied[newKey] = occupied.pop(key)
+                dict_of_occ[newKey] = dict_of_occ.pop(key)
 
 
         # for key in sorted(list(dict_of_occ), key=lambda x: x[1])[::-1]:
@@ -290,6 +293,11 @@ def clearing_rows():
 
 
 def cleaning(position):           #не работает
+    # print('Titan')
+    for i in dict_of_occ:
+        # print(i)
+        if i[0] == 0:
+            dict_of_occ[i] = (0, 0, 0)
     for i in position:
         i[0] = [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)]
 
@@ -393,7 +401,9 @@ change_fig = True
 fall_time = 0
 count_pov = 0
 
+
 while running:
+    count_fix_try = 0
     occupied = {}
     # occupied = drawing()
 
@@ -414,17 +424,19 @@ while running:
             povorot()
 
     if change_fig == True:
+        cleaning(position)
+        count_fix_try += 1
         nomer = figyry.index(figyra)
         color = figyry_colors[nomer]
         for i in c1:
             dict_of_occ[i] = color
         occupied.update(dict_of_occ)
         figyra = random.choice(figyry)
+        # print(count_fix_try, figyry.index(figyra))
         format = figyra[0]
         clearing_rows()
         coords2 = [175, -90]
         position = sozdanie_polya(formatting(figyra, moving()))
-        # cleaning(position)
         change_fig = False
     else:
         occupied.update(dict_of_occ)
