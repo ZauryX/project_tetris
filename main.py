@@ -293,7 +293,6 @@ def clearing_rows():
 
 
 def cleaning(position):           #не работает
-    # print('Titan')
     for i in dict_of_occ:
         # print(i)
         if i[0] == 0:
