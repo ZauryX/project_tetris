@@ -22,6 +22,8 @@ position = [
     [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
     [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
     [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
+    [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
+    [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)],
     [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (255, 0, 3), (255, 0, 3), (255, 0, 3), (255, 7, 3)]]
 
 kvadrat = [[[1, 1, 0, 0, 0, 0, 0, 0],
@@ -347,7 +349,7 @@ for i in coords:
 COORDS = [list1, list2, list3, list4, list5, list6, list7, list8, list9, list10, list11, list12]
 # print(COORDS)
 
-coords2 = [175, -90]
+coords2 = [175, -190]
 
 
 def moving():
@@ -436,7 +438,7 @@ while running:
         # print(count_fix_try, figyry.index(figyra))
         format = figyra[0]
         clearing_rows()
-        coords2 = [175, -90]
+        coords2 = [175, -190]
         position = sozdanie_polya(formatting(figyra, moving()))
         change_fig = False
     else:
