@@ -201,8 +201,6 @@ def formatting(figyra, coords):
     global count, c1
     c = []
     positions = []
-    # format = figyra.figyra[figyra.povorot % len(figyra.figyra)]
-    # format = figyra[0]
     nomer = figyry.index(figyra)
     color = figyry_colors[nomer]
     a, b = coords
@@ -224,7 +222,6 @@ def drawing(coord, color):
     for i in coord:
         occupied[i] = color
     sozdanie_polya(occupied)
-    # print(occupied)
     return occupied
 
 
@@ -348,13 +345,33 @@ COORDS = [list1, list2, list3, list4, list5, list6, list7, list8, list9, list10,
 # print(COORDS)
 
 coords2 = [175, -90]
+flag_to_lose = False
 
 
 def moving():
     global coords2
+    global flag_to_lose
+    global count_lost
+    global running
     # if coords2[1] <= 460:
+    if change_fig == True:
+        if flag_to_lose == True:
+            if count_lost < 10:
+                running = False
+                print(count_lost)
     if not emptiness(position):
         coords2[1] += 10
+        count_lost += 1
+        flag_to_lose = True
+        # print(count_lost)
+    else:
+        count_lost = 0
+        flag_to_lose = False
+    # # print(count_lost)
+    # if emptiness(position):
+    #     if count_lost < 10:
+    #         running = False
+    #         print(count_lost)
 
     return coords2
 
@@ -379,13 +396,15 @@ def povorot():
     else:
         count_pov = 0
     for i in c1:
+        print(c1)
         if figyra == pryamay:
-            if i[0] < 4:
+            if i[0] < 5:
                 if flag_movl:
                     format = figyra[count_pov]
             if i[0] > 4:
-                if flag_movr:
-                    format = figyra[count_pov]
+                if i[0] != 7 and i[0] != 6 and i[0] != 8:
+                    if flag_movr:
+                        format = figyra[count_pov]
         else:
             if i[0] < 5:
                 if flag_movl:
@@ -401,6 +420,7 @@ dict_of_occ = {}
 change_fig = True
 fall_time = 0
 count_pov = 0
+count_lost = 0
 
 while running:
     count_fix_try = 0
@@ -431,7 +451,8 @@ while running:
         for i in c1:
             dict_of_occ[i] = color
         occupied.update(dict_of_occ)
-        figyra = random.choice(figyry)
+        # figyra = random.choice(figyry)
+        figyra = pryamay
         # print(count_fix_try, figyry.index(figyra))
         format = figyra[0]
         clearing_rows()
