@@ -266,22 +266,14 @@ def clearing_rows():
                 except:
                     continue
 
-    if count111 > 0:  # проблема здесь, когда оно заккоментировано, всё норм
+    if count111 > 0:
         for key in sorted(list(occupied), key=lambda x: x[1])[::-1]:
             x, y = key
             if y < ind:
-                # print(key, 'titan')
                 newKey = (x, y + count111)
-                # print(newKey)
-
                 occupied[newKey] = occupied.pop(key)
                 dict_of_occ[newKey] = dict_of_occ.pop(key)
 
-        # for key in sorted(list(dict_of_occ), key=lambda x: x[1])[::-1]:
-        #     x, y = key
-        #     if y < ind:
-        #         newKey = (x, y + count111)
-        #         dict_of_occ[newKey] = dict_of_occ.pop(key)
 
 
 def cleaning(position):
