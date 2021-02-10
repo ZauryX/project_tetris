@@ -245,19 +245,14 @@ def emptiness(position):
             return True
         if i[1] != 11:
             if position[i[1] + 1][i[0]] != (0, 0, 0) and (i[0], i[1] + 1) not in c1:
-                # print(True)
                 change_fig = True
                 return True
-            # else:
-            # print(False)
+
     return False
 
 
 def clearing_rows():
     count111 = 0
-    # for i in position:
-    #     if (0, 0, 0) not in i:
-    #         print('titan', count111)
 
     for i in range(len(position) - 1, -1, -1):
         row = position[i]
@@ -289,15 +284,12 @@ def clearing_rows():
         #         dict_of_occ[newKey] = dict_of_occ.pop(key)
 
 
-def cleaning(position):  # не работает
+def cleaning(position):
     for i in dict_of_occ:
-        # print(i)
         if i[1] == 0:
             dict_of_occ[i] = (0, 0, 0)
         if i[1] == 1:
             dict_of_occ[i] = (0, 0, 0)
-    # for i in position:
-    #     i[0] = [(0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0), (0, 0, 0)]
 
 
 board = Game(8, 12)
@@ -350,28 +342,8 @@ flag_to_lose = False
 
 def moving():
     global coords2
-    global flag_to_lose
-    global count_lost
-    global running
-    # if coords2[1] <= 460:
-    if change_fig == True:
-        if flag_to_lose == True:
-            if count_lost < 10:
-                running = False
-                print(count_lost)
     if not emptiness(position):
         coords2[1] += 10
-        count_lost += 1
-        flag_to_lose = True
-        # print(count_lost)
-    else:
-        count_lost = 0
-        flag_to_lose = False
-    # # print(count_lost)
-    # if emptiness(position):
-    #     if count_lost < 10:
-    #         running = False
-    #         print(count_lost)
 
     return coords2
 
@@ -396,7 +368,6 @@ def povorot():
     else:
         count_pov = 0
     for i in c1:
-        print(c1)
         if figyra == pryamay:
             if i[0] < 5:
                 if flag_movl:
@@ -425,10 +396,6 @@ count_lost = 0
 while running:
     count_fix_try = 0
     occupied = {}
-    # occupied = drawing()
-
-    # moving(coords2)
-    # formatting(kvadrat, coords2)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -451,9 +418,9 @@ while running:
         for i in c1:
             dict_of_occ[i] = color
         occupied.update(dict_of_occ)
-        # figyra = random.choice(figyry)
-        figyra = pryamay
-        # print(count_fix_try, figyry.index(figyra))
+        figyra = random.choice(figyry)
+        if position[2][3] != (0, 0, 0) and position[2][4] != (0, 0, 0):
+            flag_to_lose = True
         format = figyra[0]
         clearing_rows()
         coords2 = [175, -90]
@@ -462,7 +429,8 @@ while running:
     else:
         occupied.update(dict_of_occ)
         position = sozdanie_polya(formatting(figyra, moving()))
-
+    if flag_to_lose:
+        break
     board.render()
     clock.tick(20)
     pygame.display.flip()
