@@ -462,6 +462,10 @@ while running:
     else:
         occupied.update(dict_of_occ)
         position = sozdanie_polya(formatting(figyra, moving()))
+    if flag_to_lose:
+        size2 = width, height = 450, 650
+        screen2 = pygame.display.set_mode(size2)
+        pygame.init()
 
     board.render()
     clock.tick(20)
